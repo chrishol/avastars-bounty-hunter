@@ -250,9 +250,10 @@ class kai_ViewManager {
 
                 <div>
                     <input id="kai_edit_score_name" type="hidden" value=""></input>
-                    Find Scores <input id="kai_edit_score_max" type="number" value=""></input> & above<br/>
+                    Find Scores <input id="kai_edit_score_max" type="number" value=""></input> & above
+                    <input id="kai_edit_score_isActive" type='checkbox' /> active<br/>
                 </div>
-                
+
                 <div>
                     <button onclick="document.dispatchEvent(new CustomEvent('kai_action', { detail: {action:'edit_save'} }))">Save</button>
                     <button onclick="document.dispatchEvent(new CustomEvent('kai_action', { detail: {action:'edit_cancel'} }))">Cancel</button>
@@ -265,29 +266,33 @@ class kai_ViewManager {
                 },
                 init : ()=>{
                     // load current record by recordID - or create a new one
-                    this.views.edit_score.data.record = this.views.edit_score.data.recordID ? 
+                    this.views.edit_score.data.record = this.views.edit_score.data.recordID ?
                         this.dataManager.find( this.views.edit_score.data.recordID ) : // should create a local copy
                         this.dataManager.create('Score')
-                    
+
                     console.log('Edit Score: Init')
                 },
                 update : ()=>{
                     // set NAME data from the input field
-                    let elName = document.getElementById('kai_edit_score_name') 
+                    let elName = document.getElementById('kai_edit_score_name')
                     // auto generate name - below
                     //if(this.views.edit_score.data.record.hasOwnProperty('name')){ this.views.edit_score.data.record.name = elName.value }
-                    
+
                     // set MAX (n) data from the input field
-                    let elMax = document.getElementById('kai_edit_score_max') 
+                    let elMax = document.getElementById('kai_edit_score_max')
                     if(this.views.edit_score.data.record.hasOwnProperty('n')){ this.views.edit_score.data.record.n = elMax.value }
 
                     // Automatic name
                     this.views.edit_score.data.record.name = `High Score: ${elMax.value}`
 
+                    // set active from checkbox
+                    let elActive = document.getElementById('kai_edit_score_isActive')
+                    if(this.views.edit_score.data.record.hasOwnProperty('active')){ this.views.edit_score.data.record.active = elActive.checked }
+
                     console.log('Edit Score: Update')
                 },
                 // render function to refresh this view with data
-                render : ()=>{ 
+                render : ()=>{
                     let record = this.views.edit_score.data.record
 
                     // NAME will be hidden
@@ -299,7 +304,11 @@ class kai_ViewManager {
                     el = document.getElementById('kai_edit_score_max')
                     el.value = record.n // make sure to keep this in sync via .update()
 
-                    console.log('Edit Score: It renders.') 
+                    // active status on/off
+                    el = document.getElementById('kai_edit_score_isActive')
+                    el.checked = record.active
+
+                    console.log('Edit Score: It renders.')
                 }
             },
             edit_rarity : {
@@ -326,8 +335,9 @@ class kai_ViewManager {
                         <option value='Uncommon'>Uncommon</option>
                         <option value='Common'>Common</option>
                     </select>
+                    <input id="kai_edit_rarity_isActive" type='checkbox' /> active
                 </div>
-                
+
                 <div>
                     <button onclick="document.dispatchEvent(new CustomEvent('kai_action', { detail: {action:'edit_save'} }))">Save</button>
                     <button onclick="document.dispatchEvent(new CustomEvent('kai_action', { detail: {action:'edit_cancel'} }))">Cancel</button>
@@ -366,31 +376,38 @@ class kai_ViewManager {
                     // set maxOverallRarityData from select
                     elSelect = document.getElementById('kai_edit_rarity_maxOverallRarity')
                     if(this.views.edit_rarity.data.record.hasOwnProperty('maxOverallRarity')){ this.views.edit_rarity.data.record.maxOverallRarity = elSelect.value }
-                
-                    
+
+                    // set active from checkbox
+                    let elActive = document.getElementById('kai_edit_rarity_isActive')
+                    if(this.views.edit_rarity.data.record.hasOwnProperty('active')){ this.views.edit_rarity.data.record.active = elActive.checked }
+
                     console.log('Edit Rarity Count: Update')
                 },
                 // render function to refresh this view with data
-                render : ()=>{ 
+                render : ()=>{
                     let record = this.views.edit_rarity.data.record
 
                     // UPDATE fields TO REFLECT data
                     let el = document.getElementById('kai_edit_rarity_name')
                     el.value = record.name // make sure to keep this in sync via .update()
-                    
+
                     // COUNT
                     el = document.getElementById('kai_edit_rarity_min')
-                    el.value = record.n 
+                    el.value = record.n
 
                     // RARITY
                     el = document.getElementById('kai_edit_rarity_select')
-                    el.value = record.rarity 
+                    el.value = record.rarity
 
                     // MAX OVERALL RARITY
                     el = document.getElementById('kai_edit_rarity_maxOverallRarity')
-                    el.value = record.maxOverallRarity 
+                    el.value = record.maxOverallRarity
 
-                    console.log('Edit Rarity Count: It renders.') 
+                    // active status on/off
+                    el = document.getElementById('kai_edit_rarity_isActive')
+                    el.checked = record.active
+
+                    console.log('Edit Rarity Count: It renders.')
                 }
             },
             alert : {
