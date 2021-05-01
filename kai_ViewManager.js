@@ -443,7 +443,8 @@ class kai_ViewManager {
         el.style.top = '0'
         el.style.left = '0'
         el.style.width = '100%'
-        //el.style.maxHeight = '540px'
+        el.style.maxHeight = '364px'
+        el.style.overflow = 'auto'
         el.style.zIndex = '99'
         el.style.padding = '96px 12px 22px 12px' // allow for global nav bar above.
         el.style.backgroundColor='white'
