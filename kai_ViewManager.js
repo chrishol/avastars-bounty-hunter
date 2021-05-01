@@ -144,7 +144,7 @@ class kai_ViewManager {
                     <option value='Uncommon'>Uncommon</option>
                     <option value='Common'>Common</option>
                 </select>
-                <input id="kai_edit_basic_isActive" type='checkbox' /> active
+                <input id="kai_edit_basic_isActive" class="active_checkbox" type='checkbox' /> active
                 <div>
                     <div id='kai_edit_basic_gender' class='box' onclick="document.dispatchEvent(new CustomEvent('kai_action', { detail: {action:'advanceBox', data:this.id} }))" oncontextmenu="document.dispatchEvent(new CustomEvent('kai_action', { detail: {action:'retreatBox', data:this.id} })); return false;"><label>Gender</label><br/><span>Any</span></div>
                     <div id='kai_edit_basic_series' class='box' onclick="document.dispatchEvent(new CustomEvent('kai_action', { detail: {action:'advanceBox', data:this.id} }))" oncontextmenu="document.dispatchEvent(new CustomEvent('kai_action', { detail: {action:'retreatBox', data:this.id} })); return false;"><label>Series</label><br/><span>Any</span></div>
@@ -251,7 +251,7 @@ class kai_ViewManager {
                 <div>
                     <input id="kai_edit_score_name" type="hidden" value=""></input>
                     Find Scores <input id="kai_edit_score_max" type="number" value=""></input> & above
-                    <input id="kai_edit_score_isActive" type='checkbox' /> active<br/>
+                    <input id="kai_edit_score_isActive" class="active_checkbox" type='checkbox' /> active<br/>
                 </div>
 
                 <div>
@@ -335,7 +335,7 @@ class kai_ViewManager {
                         <option value='Uncommon'>Uncommon</option>
                         <option value='Common'>Common</option>
                     </select>
-                    <input id="kai_edit_rarity_isActive" type='checkbox' /> active
+                    <input id="kai_edit_rarity_isActive" class="active_checkbox" type='checkbox' /> active
                 </div>
 
                 <div>
